@@ -6,6 +6,7 @@ import {
   ScrollView,
   Image,
   FlatList,
+  TouchableOpacity
 } from "react-native";
 import React, { useState, useRef, useEffect } from "react";
 import { colors, parameters } from "../global/styles";
@@ -19,7 +20,7 @@ import * as Location from "expo-location";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const [latlng, setLatLng] = useState({});
 
   const checkPermission = async () => {
@@ -68,7 +69,7 @@ const HomeScreen = () => {
           />
         </View>
       </View>
-      <ScrollView bounces={false} style={{ marginBottom: 112 }}>
+      <ScrollView bounces={false} style={{ marginBottom: 45 }}>
         <View style={styles.home}>
           <Text style={styles.text1}>Destress your commute</Text>
           <View style={styles.view1}>
@@ -76,9 +77,11 @@ const HomeScreen = () => {
               <Text style={styles.text2}>
                 Read a book. Take a nap. Stare out the window
               </Text>
-              <View style={styles.button1}>
-                <Text style={styles.button1Text}>Ride with Uber</Text>
-              </View>
+              <TouchableOpacity onPress={()=>{navigation.navigate("RequestScreen")}}>
+                <View style={styles.button1}>
+                  <Text style={styles.button1Text}>Ride with Uber</Text>
+                </View>
+              </TouchableOpacity>
             </View>
             <View>
               <Image
